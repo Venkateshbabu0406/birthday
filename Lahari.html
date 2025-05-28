@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Lahari</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: 'Inter', sans-serif;
+      height: 100vh;
+      touch-action: manipulation;
+      background: url('pic.jpg');
+      background-size: cover;
+    }
+    body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(to bottom right, rgba(255, 192, 203, 0.3), rgba(255, 255, 255, 0.3));
+  z-index: 0;
+}
+.modal {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+@keyframes fadeInModal {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal {
+  animation: fadeInModal 0.6s ease-out;
+}
+    #app {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    #content {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .step {
+      position: absolute;
+      width: 100%;
+      max-width: 800px;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+
+    .step.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+    }
+
+    .btn {
+      background: linear-gradient(135deg, #ec4899, #f43f5e);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 20px;
+      box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .text-gradient {
+      background: linear-gradient(135deg, #ec4899, #f43f5e, #f59e0b);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .heart-beat {
+      animation: heartbeat 1.5s ease-in-out infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 50%, 100% {
+        transform: scale(1);
+      }
+      25%, 75% {
+        transform: scale(1.1);
+      }
+    }
+
+    .emoji {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+
+    .reason-card {
+      background: white;
+      border-radius: 15px;
+      padding: 24px;
+      width: 260px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .reason-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div id="content">
+      <!-- Step 1 -->
+      <div class="step active" id="step1">
+        <div class="emoji heart-beat">💖</div>
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-gradient">Happy Birthday Junior</h1>
+        <p class="text-xl text-gray-700 mb-8">I made something special for you...</p>
+        <button class="btn" id="start-btn">Let's Begin</button>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step" id="step2">
+        <div class="emoji">🎉</div>
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gradient">Happiest Birthday Lahari!</h2>
+        <p class="text-lg text-gray-700 mb-6">
+          Natho niku contact avasaram lekapovachu...<br>
+‘Veedu wish cheyyakunda unte baagundedi’ ani nuvvu feel avvochu…<br>
+Ila wish cheyyadam over laga anipinchavochu 🙃.....<br>
+Kaani nenu matram ee roju nee gurinchi alocharinchakunda undalenu.<br>
+Nuvvu na life lo chala special, Lahari.<br>
+You Are The Best.  
+</p>
+        <button class="btn" id="next-btn-2">What makes you special?</button>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step" id="step3">
+        <h2 class="text-3xl md:text-4xl font-bold mb-8 text-gradient">Why you're incredible</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 justify-items-center">
+         <div class="reason-card">
+            <div class="emoji">💗</div>
+            <h3 class="text-xl font-bold mb-2 text-pink-600">Your Kindness</h3>
+            <p class="text-gray-700">You have so much love in your heart and care deeply for everyone Except me? I guess I’m the exception to your love policy!</p>
+          </div>
+           <div class="reason-card">
+            <div class="emoji">😊</div>
+            <h3 class="text-xl font-bold mb-2 text-pink-600">Your Eyes</h3>
+            <p class="text-gray-700">Your small eyes are seriously so cute! Every time you look at me, my heart just can’t stay calm. Your eyes have this magic that makes me feel so happy and alive.</p>
+          </div>
+          <div class="reason-card">
+            <div class="emoji">🔥</div>
+            <h3 class="text-xl font-bold mb-2 text-pink-600">Your Character</h3>
+            <p class="text-gray-700">Over these three years, I’ve known you as truly genuine. You know how much I care. Though I’m your senior, you’ve never misused my trust, unlike many others. That shows the strength of your character.</p>
+          </div>
+        </div>
+        <button class="btn" id="next-btn-3">A Little Surprise</button>
+      </div>
+
+      <!-- Step 4 -->
+     <div class="step" id="step4">
+      <div class="emoji">📸</div>
+     <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gradient text-center">Remember When...</h2>
+  <div class="flex flex-col items-center">
+    <img src="pic2.jpg" 
+         class="rounded-xl shadow-md w-2/5 max-h-[200px] object-cover border-4 border-pink-300" alt="My First Sight" />I
+         <p class="text-lg text-gray-400 italic mt-4 text-center">(Exactly the first time I saw you in the same photo...I had no idea who you were.But now, no matter what it is — if it’s about you, it means something to me.)</p>
+  </div>
+  <button class="btn" id="next-btn-4">One Last Thing</button>
+</div>
+
+      <!-- Step 5 -->
+      <div class="step" id="step5">
+        <div class="emoji">🎂</div>
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gradient">My Birthday Wish For You</h2>
+        <p class="text-lg text-gray-700 mb-8">
+          May your year be full of joy, love, and dreams come true. May you always know how truly special you are.
+        </p>
+        <p class="text-xl font-semibold text-pink-600 mb-8">Happy Birthday, Lalli💖!</p>
+        <button class="btn" id="confetti-btn">Celebrate!</button>
+        <p class="mt-8 text-gray-500">Made with 💖 just for you</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const steps = document.querySelectorAll('.step');
+    const btnStart = document.getElementById('start-btn');
+    const btn2 = document.getElementById('next-btn-2');
+    const btn3 = document.getElementById('next-btn-3');
+    const btn4 = document.getElementById('next-btn-4');
+    const btnConfetti = document.getElementById('confetti-btn');
+
+    btnStart.addEventListener('click', () => showStep(1));
+    btn2.addEventListener('click', () => showStep(2));
+    btn3.addEventListener('click', () => showStep(3));
+    btn4.addEventListener('click', () => showStep(4));
+    btnConfetti.addEventListener('click', () => {
+      showConfetti();
+    });
+
+    function showStep(index) {
+      steps.forEach(step => step.classList.remove('active'));
+      steps[index].classList.add('active');
+    }
+
+    function showConfetti() {
+      confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    }
+  </script>
+</body>
+</html>
